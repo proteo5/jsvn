@@ -1,4 +1,4 @@
 jsvn
 ====
 
-JSvn (Javascript View Notation
+JSvn (Javascript View Notation)
