@@ -117,6 +117,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\Shared\layout.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -129,9 +130,12 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <Content Include="app\index.js" />
+    <Content Include="app\main.js" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\javascript-loader.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />
@@ -140,8 +144,25 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\jsvn.js" />
+    <Content Include="Scripts\JSvn\jsvn.js" />
+    <Content Include="Scripts\JSvn\Lib\div.html" />
+    <Content Include="Scripts\JSvn\Lib\h1.html" />
+    <Content Include="Scripts\JSvn\Lib\h2.html" />
+    <Content Include="Scripts\JSvn\Lib\h3.html" />
+    <Content Include="Scripts\JSvn\Lib\h4.html" />
+    <Content Include="Scripts\JSvn\Lib\h5.html" />
+    <Content Include="Scripts\JSvn\Lib\h6.html" />
+    <Content Include="Scripts\JSvn\Lib\p.html" />
+    <Content Include="Scripts\JSvn\Lib\table.html" />
+    <Content Include="Scripts\JSvn\Lib\tbody.html" />
+    <Content Include="Scripts\JSvn\Lib\td.html" />
+    <Content Include="Scripts\JSvn\Lib\tfoot.html" />
+    <Content Include="Scripts\JSvn\Lib\th.html" />
+    <Content Include="Scripts\JSvn\Lib\thead.html" />
+    <Content Include="Scripts\JSvn\Lib\tr.html" />
+    <Content Include="Scripts\locache.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\mustache.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
@@ -159,6 +180,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Scripts\locache.min.js" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
