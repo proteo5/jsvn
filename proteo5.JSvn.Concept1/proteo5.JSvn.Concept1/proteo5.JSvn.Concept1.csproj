@@ -133,6 +133,7 @@
     <Content Include="app\index.js" />
     <Content Include="app\main.js" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
+    <Content Include="index.html" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\javascript-loader.js" />
