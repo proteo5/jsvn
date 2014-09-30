@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSvn (Javascript View Notation)</title>
+    <script src="Scripts/jquery-2.1.1.js"></script>
+    <script src="Scripts/mustache.js"></script>
+    <script src="Scripts/locache.js"></script>
+    <script src="Scripts/JSvn/jsvn.js"></script>
+    <script src="Scripts/JSappf/JSappf.js"></script>
+</head>
+<body>
+    <div id="main-content">
+        <div id="main-body">
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            app.start({ 
+                modulesPath:'app',
+                templatesPath: 'app/viewTemplates', 
+                bodyTag:'main-body', 
+                layoutTag: 'main-content'
+            });
+        });
+    </script>
+</body>
+</html>
