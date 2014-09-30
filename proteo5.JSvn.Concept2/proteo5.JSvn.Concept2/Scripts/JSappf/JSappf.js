@@ -50,8 +50,15 @@ var app = {
         app.loadModule("main");
     },
     view: function (view) {
-        var html = app.settings.viewEngine.renderViews(view);
-        $("#" + app.settings.bodyTag).html(html);
+        var result = null;
+        if (app.settings.doCache) {
+            result = locache.get(app.version + "-v-" + view.viewName)
+        }
+        if (result == null) {
+            result = app.settings.viewEngine.renderViews(view.view);
+            locache.set(app.version + "-v-" + view.viewName, result, 3600)
+        }
+        $("#" + app.settings.bodyTag).html(result);
     },
     loadModule: function (module) {
         //verify that the module is not allready loaded
