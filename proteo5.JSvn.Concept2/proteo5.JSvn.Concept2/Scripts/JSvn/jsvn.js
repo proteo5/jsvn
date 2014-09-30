@@ -1,4 +1,4 @@
-﻿// JavaScript View Notation (jsvn) v0.3.0 alfa, http://jsvn.org/
+﻿// JavaScript View Notation (jsvn) v0.3.1 alfa, http://jsvn.org/
 //
 // <copyright file="jsvn.js" company="Alfredo Pinto Molina">
 //      Copyright (c) 2014 All Right Reserved
@@ -57,11 +57,13 @@ var jsvn = {
     getTemplate: function (templateName) {
         var result = null;
         if (jsvn.settings.doCache) {
-            result = locache.get(jsvn.settings.appVersion + "-t-" + templateName)
+            result = locache.get(jsvn.settings.appVersion + "-t-" + templateName);
         }
         if (result == null) {
             result = jsvn.loadTemplate(templateName);
-            locache.set(jsvn.settings.appVersion + "-t-" + templateName, result, 3600)
+            if (jsvn.settings.doCache) {
+                locache.set(jsvn.settings.appVersion + "-t-" + templateName, result, 3600);
+            }
         }
         return result;
     },

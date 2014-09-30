@@ -1,4 +1,4 @@
-﻿// JavaScript Application Framework (jsappf) v0.3.0 alfa, http://jsappf.org/
+﻿// JavaScript Application Framework (jsappf) v0.3.1 alfa, http://jsappf.org/
 //
 // <copyright file="JSappf.js" company="Alfredo Pinto Molina">
 //      Copyright (c) 2014 All Right Reserved
@@ -52,11 +52,13 @@ var app = {
     view: function (view) {
         var result = null;
         if (app.settings.doCache) {
-            result = locache.get(app.version + "-v-" + view.viewName)
+            result = locache.get(app.version + "-v-" + view.viewName);
         }
         if (result == null) {
             result = app.settings.viewEngine.renderViews(view.view);
-            locache.set(app.version + "-v-" + view.viewName, result, 3600)
+            if (app.settings.doCache){
+                locache.set(app.version + "-v-" + view.viewName, result, 3600);
+            }
         }
         $("#" + app.settings.bodyTag).html(result);
     },
@@ -67,16 +69,18 @@ var app = {
             var fileref = document.createElement('script');
             fileref.setAttribute("type", "text/javascript");
             if (app.settings.doCache) {
-                result = locache.get(app.version + "-m-" + module)
+                result = locache.get(app.version + "-m-" + module);
             }
             if (result == null) {
                 result = app.loadFile(module);
-                locache.set(app.version + "-m-" + module, result, 3600)
+                if (app.settings.doCache) {
+                    locache.set(app.version + "-m-" + module, result, 3600);
+                }
             }
             var t = document.createTextNode(result);
             fileref.appendChild(t);
             if (typeof fileref != "undefined") {
-                document.getElementsByTagName("head")[0].appendChild(fileref)
+                document.getElementsByTagName("head")[0].appendChild(fileref);
             }
         }
     },
