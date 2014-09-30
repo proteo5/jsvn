@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JSvn (Javascript View Notation)</title>
-    <script src="Scripts/jquery-2.1.1.js"></script>
+    <script src="Scripts/jquery-2.1.1.min.js"></script>
     <script src="Scripts/mustache.js"></script>
     <script src="Scripts/locache.js"></script>
     <script src="Scripts/JSvn/jsvn.js"></script>
@@ -17,11 +17,13 @@
     </div>
     <script type="text/javascript">
         $(document).ready(function () {
-            app.start({ 
+            app.start({
+                version:'0.1.0',
                 modulesPath:'app',
                 templatesPath: 'app/viewTemplates', 
                 bodyTag:'main-body', 
-                layoutTag: 'main-content'
+                layoutTag: 'main-content',
+                doCache:true
             });
         });
     </script>

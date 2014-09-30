@@ -1,9 +1,8 @@
 ﻿app.modules.index = {
-    "module": "index",
-    "name": "Home Page",
-    "Description": "This is our default page",
-    "version": "0.1.0.0001",
-    "view": [
+    module: "index",
+    name: "Home Page",
+    description: "This is our default page",
+    view: [
         {
             "porlet": "h1",
             "content": "This is the main Title"
@@ -29,10 +28,12 @@
             }]
         }
     ],
-    "code": {
+    code: {
         start: function () {
             app.view(app.modules.index.view);
         }
     }
 }
-app.modules.index.code.start();
+$(document).ready(function () {
+    app.modules.index.code.start();
+});

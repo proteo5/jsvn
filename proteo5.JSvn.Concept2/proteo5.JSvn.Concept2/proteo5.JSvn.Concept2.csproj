@@ -70,7 +70,6 @@
     <Content Include="app\main.js" />
     <Content Include="app\viewTemplates\div.html" />
     <Content Include="app\viewTemplates\h1.html" />
-    <Content Include="app\viewTemplates\h2.html" />
     <Content Include="app\viewTemplates\p.html" />
     <Content Include="app\Shared\layout.js" />
     <Content Include="index.html" />

@@ -1,4 +1,4 @@
-﻿// JavaScript Application Framework (jsappf) v0.2.0 alfa, http://jsappf.org/
+﻿// JavaScript Application Framework (jsappf) v0.3.0 alfa, http://jsappf.org/
 //
 // <copyright file="JSappf.js" company="Alfredo Pinto Molina">
 //      Copyright (c) 2014 All Right Reserved
@@ -16,7 +16,8 @@ var app = {
         templateRender: Mustache, //Default template render http://mustache.github.io/
         layoutTag: "main-content",
         bodyTag: "main-body",
-        viewEngine: jsvn
+        viewEngine: jsvn,
+        doCache: true
     },
     //Method to render templates
     render: function (template, data) {
@@ -29,13 +30,21 @@ var app = {
         }
         if ($.trim(settings.templatesPath).length != 0) {
             app.settings.templatesPath = settings.templatesPath;
-            app.settings.viewEngine.settings.templatesPath = settings.templatesPath;
+            app.settings.viewEngine.setTemplatePath(settings.templatesPath);
         }
         if ($.trim(settings.bodyTag).length != 0) {
             app.settings.bodyTag = settings.bodyTag;
         }
         if ($.trim(settings.layoutTag).length != 0) {
             app.settings.layoutTag = settings.layoutTag;
+        }
+        if ($.trim(settings.doCache).length != 0) {
+            app.settings.doCache = settings.doCache;
+            app.settings.viewEngine.setCache(settings.doCache);
+        }
+        if ($.trim(settings.version).length != 0) {
+            app.version = settings.version;
+            app.settings.viewEngine.setVersion(settings.version);
         }
 
         app.loadModule("main");
@@ -46,27 +55,36 @@ var app = {
     },
     loadModule: function (module) {
         //verify that the module is not allready loaded
+        var result = null;
         if (!app.modules.hasOwnProperty(module)) {
-            // load module
-            var file = app.render("{{{path}}}/{{{module}}}.js", { module: module, path: app.settings.modulesPath });
-            app.loadFile(file, "js");
+            var fileref = document.createElement('script');
+            fileref.setAttribute("type", "text/javascript");
+            if (app.settings.doCache) {
+                result = locache.get(app.version + "-m-" + module)
+            }
+            if (result == null) {
+                result = app.loadFile(module);
+                locache.set(app.version + "-m-" + module, result, 3600)
+            }
+            var t = document.createTextNode(result);
+            fileref.appendChild(t);
+            if (typeof fileref != "undefined") {
+                document.getElementsByTagName("head")[0].appendChild(fileref)
+            }
         }
     },
-    loadFile: function (filename, filetype) {
-        // thanks to http://www.javascriptkit.com/javatutors/loadjavascriptcss.shtml
-        if (filetype == "js") { //if filename is a external JavaScript file
-            var fileref = document.createElement('script')
-            fileref.setAttribute("type", "text/javascript")
-            fileref.setAttribute("src", filename)
+    loadFile: function (filename) {
+        var url = app.render("{{{path}}}/{{{filename}}}.js", { filename: filename, path: app.settings.modulesPath })
+        var file = "console.log('Module nof found')";
+        var result = $.ajax({
+            type: "GET",
+            url: url,
+            async: false
+        });
+
+        if (result.status == 200 || result.status == 304) {
+            file = result.responseText;
         }
-        else if (filetype == "css") { //if filename is an external CSS file
-            var fileref = document.createElement("link")
-            fileref.setAttribute("rel", "stylesheet")
-            fileref.setAttribute("type", "text/css")
-            fileref.setAttribute("href", filename)
-        }
-        if (typeof fileref != "undefined") {
-            document.getElementsByTagName("head")[0].appendChild(fileref)
-        }
+        return file;
     }
 }

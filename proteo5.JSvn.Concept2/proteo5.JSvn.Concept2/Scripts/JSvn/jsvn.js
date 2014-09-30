@@ -1,4 +1,4 @@
-﻿// JavaScript View Notation (jsvn) v0.2.0 alfa, http://jsvn.org/
+﻿// JavaScript View Notation (jsvn) v0.3.0 alfa, http://jsvn.org/
 //
 // <copyright file="jsvn.js" company="Alfredo Pinto Molina">
 //      Copyright (c) 2014 All Right Reserved
@@ -10,11 +10,20 @@
 // <summary></summary>
 var jsvn = {
     settings: {
+        appVersion: "",
         doCache: true,
         templatesPath: "app/viewTemplates",
         templateRender: Mustache //Default template render http://mustache.github.io/
     },
-    templatesLoaded: [],
+    setVersion: function (version) {
+        jsvn.settings.appVersion = version;
+    },
+    setTemplatePath: function (templatesPath) {
+        jsvn.settings.templatesPath = templatesPath;
+    },
+    setCache: function (doCache) {
+        jsvn.settings.doCache = doCache;
+    },
     render: function (template, data) {
         return jsvn.settings.templateRender.render(template, data);
     },
@@ -46,18 +55,13 @@ var jsvn = {
         return jsvn.render(template, { attributes: attributes, content: content });
     },
     getTemplate: function (templateName) {
-        var doLoadFile = true;
         var result = null;
-
-        $.each(jsvn.templatesLoaded, function (i, item) {
-            if (item.templateName == templateName) {
-                doLoadFile = false;
-                result = item.template;
-            }
-        });
-
-        if (doLoadFile) {
+        if (jsvn.settings.doCache) {
+            result = locache.get(jsvn.settings.appVersion + "-t-" + templateName)
+        }
+        if (result == null) {
             result = jsvn.loadTemplate(templateName);
+            locache.set(jsvn.settings.appVersion + "-t-" + templateName, result, 3600)
         }
         return result;
     },
@@ -69,11 +73,10 @@ var jsvn = {
             url: url,
             async: false
         });
-        
+
         if (result.status == 200 || result.status == 304) {
             template = result.responseText;
         }
-        jsvn.templatesLoaded.push({ templateName: templateName, template: template });
         return template;
     }
 };
