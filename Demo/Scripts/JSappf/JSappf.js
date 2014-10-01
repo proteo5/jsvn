@@ -56,11 +56,11 @@ var app = {
         }
         if (result == null) {
             result = app.settings.viewEngine.renderViews(view.view);
-            if (app.settings.doCache){
+            if (app.settings.doCache) {
                 locache.set(app.version + "-v-" + view.viewName, result, 3600);
             }
         }
-        $("#" + app.settings.bodyTag).html(result);
+        document.getElementById(app.settings.bodyTag).innerHTML = result;
     },
     loadModule: function (module) {
         //verify that the module is not allready loaded
@@ -68,14 +68,8 @@ var app = {
         if (!app.modules.hasOwnProperty(module)) {
             var fileref = document.createElement('script');
             fileref.setAttribute("type", "text/javascript");
-            if (app.settings.doCache) {
-                result = locache.get(app.version + "-m-" + module);
-            }
             if (result == null) {
                 result = app.loadFile(module);
-                if (app.settings.doCache) {
-                    locache.set(app.version + "-m-" + module, result, 3600);
-                }
             }
             var t = document.createTextNode(result);
             fileref.appendChild(t);
