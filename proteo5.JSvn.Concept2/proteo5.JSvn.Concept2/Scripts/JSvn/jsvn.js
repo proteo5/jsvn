@@ -13,7 +13,8 @@ var jsvn = {
         appVersion: "",
         doCache: true,
         templatesPath: "app/viewTemplates",
-        templateRender: Mustache //Default template render http://mustache.github.io/
+        templateRender: Mustache, //Default template render http://mustache.github.io/
+        externalPorlets: ''
     },
     setVersion: function (version) {
         jsvn.settings.appVersion = version;
@@ -68,16 +69,19 @@ var jsvn = {
         return result;
     },
     loadTemplate: function (templateName) {
-        var url = app.render("{{{path}}}/{{{templateName}}}.html", { templateName: templateName, path: jsvn.settings.templatesPath })
         var template = "<" + templateName + " {{{attributes}}}>{{{content}}}</" + templateName + ">";
-        var result = $.ajax({
-            type: "GET",
-            url: url,
-            async: false
-        });
+        if (jsvn.settings.externalPorlets.indexOf(templateName) != -1) {
+            var url = app.render("{{{path}}}/{{{templateName}}}.html", { templateName: templateName, path: jsvn.settings.templatesPath })
 
-        if (result.status == 200 || result.status == 304) {
-            template = result.responseText;
+            var result = $.ajax({
+                type: "GET",
+                url: url,
+                async: false
+            });
+
+            if (result.status == 200 || result.status == 304) {
+                template = result.responseText;
+            }
         }
         return template;
     }
