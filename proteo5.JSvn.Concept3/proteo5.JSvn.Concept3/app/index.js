@@ -51,6 +51,17 @@
                     "porlet": "button",
                     "data-bind": "click: actionButton",
                     "content": "Click Me"
+                },
+                {
+                    "porlet": "br"
+                },
+                {
+                    "porlet": "hr"
+                },
+                {
+                    "porlet": "a",
+                    "href": "#/configurations/users",
+                    "content":"Users page"
                 }
                 ]
             }

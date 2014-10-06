@@ -49,6 +49,14 @@ var app = {
         }
 
         //Register Routes
+        Path.root("#/index");
+        Path.map("#/:param1(/:param2)").to(function () {
+            var param1 = this.params["param1"] || "";
+            var param2 = this.params["param2"] || "";
+            var module = param1 + (param2 == "" ? '' : '_' + param2);
+            app.loadModule(module);
+        });
+        Path.listen();
 
         // Start Application
         app.loadModule("main");
@@ -83,12 +91,13 @@ var app = {
             fileref.appendChild(t);
             if (typeof fileref != "undefined") {
                 document.getElementsByTagName("head")[0].appendChild(fileref);
-                app.executeFunctionByName(module + ".code.start", app.modules);
             }
         }
+        app.executeFunctionByName(module + ".code.start", app.modules);
     },
     loadFile: function (filename) {
-        var url = app.render("{{{path}}}/{{{filename}}}.js", { filename: filename, path: app.settings.modulesPath })
+        actualFilename = filename.replace("_","/");
+        var url = app.render("{{{path}}}/{{{filename}}}.js", { filename: actualFilename, path: app.settings.modulesPath })
         var result = $.ajax({
             type: "GET",
             url: url,
