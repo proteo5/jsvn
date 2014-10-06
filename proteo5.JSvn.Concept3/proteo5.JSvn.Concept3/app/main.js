@@ -13,11 +13,6 @@ app.modules.main = {
             $('title').text(title);
             app.settings.viewEngine.settings.externalPorlets = app.settings.externalPorlets;
             app.loadModule(app.settings.initialModule);
-
         }
     }
 };
-
-$(document).ready(function () {
-    app.modules.main.code.start();
-});

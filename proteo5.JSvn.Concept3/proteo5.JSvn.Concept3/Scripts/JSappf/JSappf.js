@@ -8,7 +8,7 @@
 // <email></email>
 // <date>2014-10-29</date>
 // <summary></summary>
-
+var contador = 0;
 var app = {
     settings: {
         modulesPath: "app", //default directory will be 'app'
@@ -64,8 +64,8 @@ var app = {
                 locache.set(app.version + "-v-" + view.viewName, result, 3600);
             }
         }
-        
-        ko.cleanNode($('#'+app.settings.bodyTag)[0]);
+
+        ko.cleanNode($('#' + app.settings.bodyTag)[0]);
         document.getElementById(app.settings.bodyTag).innerHTML = result;
         if (model != undefined)
             ko.applyBindings(model, document.getElementById(app.settings.bodyTag));
@@ -83,6 +83,7 @@ var app = {
             fileref.appendChild(t);
             if (typeof fileref != "undefined") {
                 document.getElementsByTagName("head")[0].appendChild(fileref);
+                app.executeFunctionByName(module + ".code.start", app.modules);
             }
         }
     },
@@ -98,5 +99,14 @@ var app = {
             file = result.responseText;
         }
         return file;
+    },
+    executeFunctionByName: function (functionName, context /*, args */) {
+        var args = Array.prototype.slice.call(arguments, 2);
+        var namespaces = functionName.split(".");
+        var func = namespaces.pop();
+        for (var i = 0; i < namespaces.length; i++) {
+            context = context[namespaces[i]];
+        }
+        return context[func].apply(context, args);
     }
 }

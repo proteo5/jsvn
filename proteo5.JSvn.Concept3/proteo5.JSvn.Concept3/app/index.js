@@ -2,7 +2,7 @@
     module: "index",
     name: "Home Page",
     description: "This is our default page",
-    model: null,
+    model: {},
     view: {
         viewName: 'index',
         view: [
@@ -49,7 +49,7 @@
                 },
                 {
                     "porlet": "button",
-                    "data-bind": "click: actionButton()",
+                    "data-bind": "click: actionButton",
                     "content": "Click Me"
                 }
                 ]
@@ -58,18 +58,20 @@
     },
     code: {
         start: function () {
-            app.modules.index.model = function () {
-                this.firstName = ko.observable('a');
-                this.lastName = ko.observable('b');
-                this.actionButton = function () { console.log('test') };
-                this.fullName = ko.computed(function () {
-                    return this.firstName() + " " + this.lastName();
-                }, this);
-            };
-            app.view(app.modules.index.view, app.modules.index.model);
+            var myModel = app.modules.index.model;
+            myModel.firstName = ko.observable('a');
+            myModel.lastName = ko.observable('b');
+            myModel.actionButton = app.modules.index.code.actionButton;
+            myModel.fullName = ko.computed(function () {
+                       return this.firstName() + " " + this.lastName();
+            }, myModel);
+
+            app.view(app.modules.index.view, myModel);
+        },
+        actionButton: function () {
+            var myModel = app.modules.index.model;
+            console.log(myModel.firstName() + " " + myModel.lastName());
+            alert(myModel.firstName() + " " + myModel.lastName());
         }
     }
 }
-$(document).ready(function () {
-    app.modules.index.code.start();
-});
