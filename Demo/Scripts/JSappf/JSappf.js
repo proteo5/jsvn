@@ -8,7 +8,7 @@
 // <email></email>
 // <date>2014-10-29</date>
 // <summary></summary>
-
+var contador = 0;
 var app = {
     settings: {
         modulesPath: "app", //default directory will be 'app'
@@ -25,6 +25,7 @@ var app = {
     },
     modules: {},
     start: function (settings) {
+        //set Seetings
         if ($.trim(settings.modulesPath).length != 0) {
             app.settings.modulesPath = settings.modulesPath;
         }
@@ -47,9 +48,20 @@ var app = {
             app.settings.viewEngine.setVersion(settings.version);
         }
 
+        //Register Routes
+        Path.root("#/index");
+        Path.map("#/:param1(/:param2)").to(function () {
+            var param1 = this.params["param1"] || "";
+            var param2 = this.params["param2"] || "";
+            var module = param1 + (param2 == "" ? '' : '_' + param2);
+            app.loadModule(module);
+        });
+        Path.listen();
+
+        // Start Application
         app.loadModule("main");
     },
-    view: function (view) {
+    view: function (view, model) {
         var result = null;
         if (app.settings.doCache) {
             result = locache.get(app.version + "-v-" + view.viewName);
@@ -60,7 +72,11 @@ var app = {
                 locache.set(app.version + "-v-" + view.viewName, result, 3600);
             }
         }
+
+        ko.cleanNode($('#' + app.settings.bodyTag)[0]);
         document.getElementById(app.settings.bodyTag).innerHTML = result;
+        if (model != undefined)
+            ko.applyBindings(model, document.getElementById(app.settings.bodyTag));
     },
     loadModule: function (module) {
         //verify that the module is not allready loaded
@@ -77,10 +93,11 @@ var app = {
                 document.getElementsByTagName("head")[0].appendChild(fileref);
             }
         }
+        app.executeFunctionByName(module + ".code.start", app.modules);
     },
     loadFile: function (filename) {
-        var url = app.render("{{{path}}}/{{{filename}}}.js", { filename: filename, path: app.settings.modulesPath })
-        var file = "console.log('Module nof found')";
+        actualFilename = filename.replace("_","/");
+        var url = app.render("{{{path}}}/{{{filename}}}.js", { filename: actualFilename, path: app.settings.modulesPath })
         var result = $.ajax({
             type: "GET",
             url: url,
@@ -91,5 +108,14 @@ var app = {
             file = result.responseText;
         }
         return file;
+    },
+    executeFunctionByName: function (functionName, context /*, args */) {
+        var args = Array.prototype.slice.call(arguments, 2);
+        var namespaces = functionName.split(".");
+        var func = namespaces.pop();
+        for (var i = 0; i < namespaces.length; i++) {
+            context = context[namespaces[i]];
+        }
+        return context[func].apply(context, args);
     }
 }

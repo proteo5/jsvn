@@ -52,24 +52,24 @@ var jsvn = {
             }
         });
 
-        var template = jsvn.getTemplate(porlet);
+        var template = jsvn.getTemplate(porlet, content);
         return jsvn.render(template, { attributes: attributes, content: content });
     },
-    getTemplate: function (templateName) {
+    getTemplate: function (templateName, content) {
         var result = null;
         if (jsvn.settings.doCache) {
             result = locache.get(jsvn.settings.appVersion + "-t-" + templateName);
         }
         if (result == null) {
-            result = jsvn.loadTemplate(templateName);
+            result = jsvn.loadTemplate(templateName, content);
             if (jsvn.settings.doCache) {
                 locache.set(jsvn.settings.appVersion + "-t-" + templateName, result, 3600);
             }
         }
         return result;
     },
-    loadTemplate: function (templateName) {
-        var template = "<" + templateName + " {{{attributes}}}>{{{content}}}</" + templateName + ">";
+    loadTemplate: function (templateName, content) {
+        var template = "<" + templateName + " {{{attributes}}}" + (content == "" ? " />" : ">{{{content}}}</" + templateName + ">");
         if (jsvn.settings.externalPorlets.indexOf(templateName) != -1) {
             var url = app.render("{{{path}}}/{{{templateName}}}.html", { templateName: templateName, path: jsvn.settings.templatesPath })
 

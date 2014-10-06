@@ -2,6 +2,7 @@
     module: "index",
     name: "Home Page",
     description: "This is our default page",
+    model: {},
     view: {
         viewName: 'index',
         view: [
@@ -26,17 +27,62 @@
                 },
                 {
                     "porlet": "p",
-                    "content": "test p tag"
-                }]
+                    "data-bind": "text: fullName",
+                    "content": ""
+                },
+                {
+                    "porlet": "hr"
+                },
+                {
+                    "porlet": "input",
+                    "data-bind": "value:firstName"
+                },
+                {
+                    "porlet": "br"
+                },
+                {
+                    "porlet": "input",
+                    "data-bind": "value:lastName"
+                },
+                {
+                     "porlet": "br"
+                },
+                {
+                    "porlet": "button",
+                    "data-bind": "click: actionButton",
+                    "content": "Click Me"
+                },
+                {
+                    "porlet": "br"
+                },
+                {
+                    "porlet": "hr"
+                },
+                {
+                    "porlet": "a",
+                    "href": "#/configurations/users",
+                    "content":"Users page"
+                }
+                ]
             }
         ]
     },
     code: {
         start: function () {
-            app.view(app.modules.index.view);
+            var myModel = app.modules.index.model;
+            myModel.firstName = ko.observable('a');
+            myModel.lastName = ko.observable('b');
+            myModel.actionButton = app.modules.index.code.actionButton;
+            myModel.fullName = ko.computed(function () {
+                       return this.firstName() + " " + this.lastName();
+            }, myModel);
+
+            app.view(app.modules.index.view, myModel);
+        },
+        actionButton: function () {
+            var myModel = app.modules.index.model;
+            console.log(myModel.firstName() + " " + myModel.lastName());
+            alert(myModel.firstName() + " " + myModel.lastName());
         }
     }
 }
-$(document).ready(function () {
-    app.modules.index.code.start();
-});
