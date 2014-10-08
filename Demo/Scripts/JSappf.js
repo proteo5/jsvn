@@ -1,4 +1,4 @@
-﻿// JavaScript Application Framework (jsappf) v0.3.1 alfa, http://jsappf.org/
+﻿// JavaScript Application Framework (jsappf) v0.4.0 alfa, http://jsappf.org/
 //
 // <copyright file="JSappf.js" company="Alfredo Pinto Molina">
 //      Copyright (c) 2014 All Right Reserved
@@ -11,8 +11,8 @@
 var contador = 0;
 var app = {
     settings: {
-        modulesPath: "app", //default directory will be 'app'
-        templatesPath: "app/viewTemplates",
+        modulesPath: "modules", //default directory will be 'app'
+        viewsPath: "views",
         templateRender: Mustache, //Default template render http://mustache.github.io/
         layoutTag: "main-content",
         bodyTag: "main-body",
@@ -29,25 +29,30 @@ var app = {
         if ($.trim(settings.modulesPath).length != 0) {
             app.settings.modulesPath = settings.modulesPath;
         }
-        if ($.trim(settings.templatesPath).length != 0) {
-            app.settings.templatesPath = settings.templatesPath;
-            app.settings.viewEngine.setTemplatePath(settings.templatesPath);
+
+        if ($.trim(settings.viewsPath).length != 0) {
+            app.settings.viewsPath = settings.viewsPath;
         }
+
         if ($.trim(settings.bodyTag).length != 0) {
             app.settings.bodyTag = settings.bodyTag;
         }
+
         if ($.trim(settings.layoutTag).length != 0) {
             app.settings.layoutTag = settings.layoutTag;
         }
+
         if ($.trim(settings.doCache).length != 0) {
             app.settings.doCache = settings.doCache;
-            app.settings.viewEngine.setCache(settings.doCache);
-        }
-        if ($.trim(settings.version).length != 0) {
-            app.version = settings.version;
-            app.settings.viewEngine.setVersion(settings.version);
         }
 
+        if ($.trim(settings.version).length != 0) {
+            app.version = settings.version;
+        }
+        //Set view engine settings
+        app.settings.viewEngine.setVersion(app.version);
+        app.settings.viewEngine.setViewsPath(app.settings.viewsPath);
+        app.settings.viewEngine.setCache(app.settings.doCache);
         //Register Routes
         Path.root("#/index");
         Path.map("#/:param1(/:param2)").to(function () {
@@ -56,10 +61,11 @@ var app = {
             var module = param1 + (param2 == "" ? '' : '_' + param2);
             app.loadModule(module);
         });
-        Path.listen();
 
         // Start Application
         app.loadModule("main");
+
+        Path.listen();
     },
     view: function (view, model) {
         var result = null;
@@ -67,16 +73,19 @@ var app = {
             result = locache.get(app.version + "-v-" + view.viewName);
         }
         if (result == null) {
-            result = app.settings.viewEngine.renderViews(view.view);
+            result = app.settings.viewEngine.renderViews(view.elements);
             if (app.settings.doCache) {
                 locache.set(app.version + "-v-" + view.viewName, result, 3600);
             }
         }
 
-        ko.cleanNode($('#' + app.settings.bodyTag)[0]);
+        if (model != undefined) {
+            ko.cleanNode($('#' + app.settings.bodyTag)[0]);
+        }
         document.getElementById(app.settings.bodyTag).innerHTML = result;
-        if (model != undefined)
+        if (model != undefined) {
             ko.applyBindings(model, document.getElementById(app.settings.bodyTag));
+        }
     },
     loadModule: function (module) {
         //verify that the module is not allready loaded
@@ -85,7 +94,8 @@ var app = {
             var fileref = document.createElement('script');
             fileref.setAttribute("type", "text/javascript");
             if (result == null) {
-                result = app.loadFile(module);
+                var path = module == 'main' ? "" : app.settings.modulesPath + "/";
+                result = app.loadFile(path, module + ".js");
             }
             var t = document.createTextNode(result);
             fileref.appendChild(t);
@@ -95,9 +105,9 @@ var app = {
         }
         app.executeFunctionByName(module + ".code.start", app.modules);
     },
-    loadFile: function (filename) {
-        actualFilename = filename.replace("_","/");
-        var url = app.render("{{{path}}}/{{{filename}}}.js", { filename: actualFilename, path: app.settings.modulesPath })
+    loadFile: function (path, filename) {
+        actualFilename = filename.replace("_", "/");
+        var url = app.render("{{{path}}}{{{filename}}}", { filename: actualFilename, path: path })
         var result = $.ajax({
             type: "GET",
             url: url,

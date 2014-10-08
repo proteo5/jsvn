@@ -5,61 +5,61 @@
     model: {},
     view: {
         viewName: 'index',
-        view: [
+        elements: [
             {
-                "porlet": "h1",
+                "element": "h1",
                 "content": "This is the main Title"
             },
             {
-                "porlet": "div",
+                "element": "div",
                 "id": "div1",
                 "style": "color:blue;",
                 "content": "test div 1"
             },
             {
-                "porlet": "div",
+                "element": "div",
                 "id": "div2",
                 "style": "color:red;",
                 "content": [{
-                    "porlet": "h2",
+                    "element": "h2",
                     "style": "color:green;",
                     "content": "This is the h2 Title"
                 },
                 {
-                    "porlet": "p",
+                    "element": "p",
                     "data-bind": "text: fullName",
                     "content": ""
                 },
                 {
-                    "porlet": "hr"
+                    "element": "hr"
                 },
                 {
-                    "porlet": "input",
+                    "element": "input",
                     "data-bind": "value:firstName"
                 },
                 {
-                    "porlet": "br"
+                    "element": "br"
                 },
                 {
-                    "porlet": "input",
+                    "element": "input",
                     "data-bind": "value:lastName"
                 },
                 {
-                     "porlet": "br"
+                    "element": "br"
                 },
                 {
-                    "porlet": "button",
+                    "element": "button",
                     "data-bind": "click: actionButton",
                     "content": "Click Me"
                 },
                 {
-                    "porlet": "br"
+                    "element": "br"
                 },
                 {
-                    "porlet": "hr"
+                    "element": "hr"
                 },
                 {
-                    "porlet": "a",
+                    "element": "a",
                     "href": "#/configurations/users",
                     "content":"Users page"
                 }
@@ -76,12 +76,10 @@
             myModel.fullName = ko.computed(function () {
                        return this.firstName() + " " + this.lastName();
             }, myModel);
-
             app.view(app.modules.index.view, myModel);
         },
         actionButton: function () {
             var myModel = app.modules.index.model;
-            console.log(myModel.firstName() + " " + myModel.lastName());
             alert(myModel.firstName() + " " + myModel.lastName());
         }
     }

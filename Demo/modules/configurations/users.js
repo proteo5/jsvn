@@ -2,22 +2,21 @@
     module: "configurations users",
     name: "users configuration Page",
     description: "This is the page to update users",
-    model: {},
     view: {
         viewName: 'users configuration',
-        view: [
+        elements: [
             {
-                "porlet": "h1",
+                "element": "h1",
                 "content": "This is the users module"
             },
             {
-                "porlet": "div",
+                "element": "div",
                 "id": "div1",
                 "style": "color:blue;",
                 "content": "This is the content for the users module"
             },
                 {
-                    "porlet": "a",
+                    "element": "a",
                     "href": "#/index",
                     "content": "back to index"
                 }
@@ -25,9 +24,8 @@
     },
     code: {
         start: function () {
-            var myModel = app.modules.configurations_users.model;
-
-            app.view(app.modules.configurations_users.view, myModel);
+            console.log("users configuration starting...");
+            app.view(app.modules.configurations_users.view);
             console.log("users configuration modules loaded...");
         }
     }
