@@ -78,8 +78,19 @@
                       },
                       {
                           "element": "a",
-                          "href": "#/configurations/roles",
-                          "content": "roles page"
+                          "href": "#/configurations/sites",
+                          "content": "Sites page"
+                      },
+                      {
+                          "element": "br"
+                      },
+                      {
+                          "element": "hr"
+                      },
+                      {
+                          "element": "a",
+                          "href": "#/demo",
+                          "content": "Demo page"
                       }
                     ]
                 }

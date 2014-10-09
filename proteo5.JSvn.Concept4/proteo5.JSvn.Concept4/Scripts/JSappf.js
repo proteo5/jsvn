@@ -71,7 +71,7 @@ var app = {
             result = locache.get(app.version + "-v-" + data.view.viewName);
         }
         if (result == null) {
-            result = app.settings.viewEngine.renderViews(data.view.elements);
+            result = app.settings.viewEngine.getViewHTML(data.view);
             if (app.settings.doCache) {
                 locache.set(app.version + "-v-" + data.view.viewName, result, 3600);
             }

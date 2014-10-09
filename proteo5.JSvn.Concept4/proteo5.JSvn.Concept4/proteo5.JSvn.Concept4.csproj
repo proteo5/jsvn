@@ -57,7 +57,9 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="views\configurations\roles.json" />
+    <None Include="views\configurations\sites.json" />
+    <Content Include="modules\demo.js" />
+    <Content Include="views\demo.html" />
     <Content Include="views\shared\layout.json" />
     <Content Include="views\shared\viewNotFound.json" />
     <None Include="Web.Debug.config">
@@ -68,7 +70,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="modules\configurations\roles.js" />
+    <Content Include="modules\configurations\sites.js" />
     <Content Include="modules\configurations\users.js" />
     <Content Include="modules\index.js" />
     <Content Include="main.js" />

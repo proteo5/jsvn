@@ -38,12 +38,10 @@
     },
     code: {
         start: function () {
-            console.log("users configuration starting...");
             app.view({
                 view: app.modules.configurations_users.view,
                 place: app.settings.bodyTag
             });
-            console.log("users configuration modules loaded...");
         }
     }
 }

@@ -28,6 +28,25 @@ var jsvn = {
     render: function (template, data) {
         return jsvn.settings.templateRender.render(template, data);
     },
+    getViewHTML: function (view) {
+        var elementHTML = "";
+        if (view.elements.length == 0) {
+            var file = jsvn.loadView(view.viewPath + view.viewName, view.viewType);
+            console.log(file);
+            if (view.viewType == "json") {
+                var viewJson = $.parseJSON(file);
+                elementHTML = jsvn.renderViews(viewJson.elements);
+            } else {
+                elementHTML = file;
+            }
+        } else {
+            elementHTML = jsvn.renderViews(view.elements);
+        }
+        if (elementHTML == "") {
+            elementHTML = $.parseJSON(jsvn.loadView("shared/viewNotFound", "json"));
+        }
+        return elementHTML;
+    },
     renderViews: function (elements) {
         var elementHTML = "";
         $.each(elements, function (i, item) {
@@ -58,7 +77,7 @@ var jsvn = {
     getElement: function (elementName, content) {
         result = "";
         if (jsvn.settings.externalViews.indexOf(elementName) != -1) {
-            result = jsvn.loadView(elementName, content);
+            result = jsvn.loadView(elementName, "html");
         }
 
         if (result == "") {
@@ -67,11 +86,12 @@ var jsvn = {
 
         return result;
     },
-    loadView: function (viewName, content) {
-        var url = app.render("{{{path}}}/{{{viewName}}}.html", { viewName: viewName, path: jsvn.settings.viewsPath })
+    loadView: function (viewName, viewType) {
+        var url = app.render("{{{path}}}/{{{viewName}}}.{{{viewType}}}", { viewName: viewName, viewType: viewType, path: jsvn.settings.viewsPath })
         var view = "";
         var result = $.ajax({
             type: "GET",
+            dataType: viewType,
             url: url,
             async: false
         });

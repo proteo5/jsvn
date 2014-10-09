@@ -1,7 +1,4 @@
-﻿// "viewName": "roles",
-// "description":"This is the view for the roles view",
-// "viewType": "json"
-{
+﻿{
     "elements": [
         {
             "element": "div",
@@ -14,11 +11,11 @@
                     "content": [
                         {
                             "element": "h1",
-                            "content": "Roles Module"
+                            "content": "Sites Module"
                         },
                         {
                             "element": "p",
-                            "content": "This is the content for the Roles Module."
+                            "content": "This is the content for the Sitess Module."
                         },
                         {
                             "element": "a",
