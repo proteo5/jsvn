@@ -14,13 +14,12 @@
               "content": [
                 {
                     "element": "h1",
-                    "content": "This is the main Title"
+                    "text": "This is the **main** Title"
                 },
                 {
-                    "element": "div",
-                    "id": "div1",
+                    "element": "p",
                     "style": "color:blue;",
-                    "content": "test div 1"
+                    "text": "test **div 1** to demostrate what can this do"
                 },
                 {
                     "element": "div",
@@ -30,7 +29,7 @@
                       {
                           "element": "h2",
                           "style": "color:green;",
-                          "content": "This is the h2 Title"
+                          "text": "This is the **h2** Title"
                       },
                       {
                           "element": "p",
@@ -57,6 +56,7 @@
                       {
                           "element": "button",
                           "data-bind": "click: actionButton",
+                          "class": "btn btn-primary btn-lg",
                           "content": "Click Me"
                       },
                       {
@@ -68,7 +68,7 @@
                       {
                           "element": "a",
                           "href": "#/configurations/users",
-                          "content": "Users page"
+                          "text": "**Users** page"
                       },
                       {
                           "element": "br"
@@ -79,7 +79,7 @@
                       {
                           "element": "a",
                           "href": "#/configurations/sites",
-                          "content": "Sites page"
+                          "text": "**Sites** page"
                       },
                       {
                           "element": "br"
@@ -90,7 +90,7 @@
                       {
                           "element": "a",
                           "href": "#/demo",
-                          "content": "Demo page"
+                          "text": "**Demo** page"
                       }
                     ]
                 }

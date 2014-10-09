@@ -63,6 +63,9 @@ var jsvn = {
                 case "content":
                     content = typeof item == "string" ? item : jsvn.renderViews(item);
                     break;
+                case "text":
+                    content = marked(item);
+                    break;
                 case "element":
                     element = item;
                     break;

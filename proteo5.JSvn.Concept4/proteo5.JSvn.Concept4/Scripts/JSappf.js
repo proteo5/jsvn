@@ -81,7 +81,7 @@ var app = {
             data.modelPlace = data.modelPlace == undefined ? data.place : data.modelPlace;
             ko.cleanNode($('#' + data.modelPlace)[0]);
         }
-        document.getElementById(data.place).innerHTML = result;
+        document.getElementById(data.place).innerHTML = result ;
         if (data.model != undefined) {
             ko.applyBindings(data.model, document.getElementById(data.modelPlace));
         }

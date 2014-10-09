@@ -14,6 +14,7 @@
                 },
                 place: app.settings.bodyTag
             });
+            $('#carousel-example-generic').carousel()
         }
     }
 }
