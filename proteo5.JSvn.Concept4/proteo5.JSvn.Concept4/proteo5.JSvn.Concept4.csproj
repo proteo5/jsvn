@@ -57,6 +57,9 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="views\configurations\roles.json" />
+    <Content Include="views\shared\layout.json" />
+    <Content Include="views\shared\viewNotFound.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -65,6 +68,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="modules\configurations\roles.js" />
     <Content Include="modules\configurations\users.js" />
     <Content Include="modules\index.js" />
     <Content Include="main.js" />
@@ -83,9 +87,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="views\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

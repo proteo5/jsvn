@@ -14,7 +14,6 @@ var app = {
         modulesPath: "modules", //default directory will be 'app'
         viewsPath: "views",
         templateRender: Mustache, //Default template render http://mustache.github.io/
-        layoutTag: "main-content",
         bodyTag: "main-body",
         viewEngine: jsvn,
         doCache: true
@@ -38,10 +37,6 @@ var app = {
             app.settings.bodyTag = settings.bodyTag;
         }
 
-        if ($.trim(settings.layoutTag).length != 0) {
-            app.settings.layoutTag = settings.layoutTag;
-        }
-
         if ($.trim(settings.doCache).length != 0) {
             app.settings.doCache = settings.doCache;
         }
@@ -49,10 +44,12 @@ var app = {
         if ($.trim(settings.version).length != 0) {
             app.version = settings.version;
         }
+
         //Set view engine settings
         app.settings.viewEngine.setVersion(app.version);
         app.settings.viewEngine.setViewsPath(app.settings.viewsPath);
         app.settings.viewEngine.setCache(app.settings.doCache);
+
         //Register Routes
         Path.root("#/index");
         Path.map("#/:param1(/:param2)").to(function () {
@@ -67,24 +64,26 @@ var app = {
 
         Path.listen();
     },
-    view: function (view, model) {
+    view: function (data) {
+        //console.log("caller is ", printStackTrace().join('\n\n'));
         var result = null;
         if (app.settings.doCache) {
-            result = locache.get(app.version + "-v-" + view.viewName);
+            result = locache.get(app.version + "-v-" + data.view.viewName);
         }
         if (result == null) {
-            result = app.settings.viewEngine.renderViews(view.elements);
+            result = app.settings.viewEngine.renderViews(data.view.elements);
             if (app.settings.doCache) {
-                locache.set(app.version + "-v-" + view.viewName, result, 3600);
+                locache.set(app.version + "-v-" + data.view.viewName, result, 3600);
             }
         }
 
-        if (model != undefined) {
-            ko.cleanNode($('#' + app.settings.bodyTag)[0]);
+        if (data.model != undefined) {
+            data.modelPlace = data.modelPlace == undefined ? data.place : data.modelPlace;
+            ko.cleanNode($('#' + data.modelPlace)[0]);
         }
-        document.getElementById(app.settings.bodyTag).innerHTML = result;
-        if (model != undefined) {
-            ko.applyBindings(model, document.getElementById(app.settings.bodyTag));
+        document.getElementById(data.place).innerHTML = result;
+        if (data.model != undefined) {
+            ko.applyBindings(data.model, document.getElementById(data.modelPlace));
         }
     },
     loadModule: function (module) {
@@ -107,6 +106,7 @@ var app = {
     },
     loadFile: function (path, filename) {
         actualFilename = filename.replace("_", "/");
+        var file = '';
         var url = app.render("{{{path}}}{{{filename}}}", { filename: actualFilename, path: path })
         var result = $.ajax({
             type: "GET",

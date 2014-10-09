@@ -1,0 +1,34 @@
+﻿// "viewName": "roles",
+// "description":"This is the view for the roles view",
+// "viewType": "json"
+{
+    "elements": [
+        {
+            "element": "div",
+            "class": "container",
+            "content": [
+                {
+                    "element": "div",
+                    "class": "jumbotron",
+                    "style": "margin-top: 50px;",
+                    "content": [
+                        {
+                            "element": "h1",
+                            "content": "Roles Module"
+                        },
+                        {
+                            "element": "p",
+                            "content": "This is the content for the Roles Module."
+                        },
+                        {
+                            "element": "a",
+                            "class": "btn btn-primary btn-lg",
+                            "href": "#/index",
+                            "content": "Back to Index"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
