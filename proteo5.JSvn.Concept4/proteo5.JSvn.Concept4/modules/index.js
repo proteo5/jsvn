@@ -11,6 +11,10 @@
         "h2Title": {
             "en-US": "This is the **h2** Title",
             "es-MX": "Este es el titulo **h2**"
+        },
+        "buttonAction": {
+            "en-US": "Click **Me**",
+            "es-MX": "Clic **Aqui**"
         }
     },
     view: {
@@ -67,7 +71,7 @@
                           "element": "button",
                           "data-bind": "click: actionButton",
                           "class": "btn btn-primary btn-lg",
-                          "content": "Click Me"
+                          "resource": "buttonAction"
                       },
                       {
                           "element": "br"
