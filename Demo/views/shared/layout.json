@@ -1,0 +1,10 @@
+﻿{
+    "viewName": "Layout",
+    "elements": [
+        {
+            "element": "div",
+            "id": "main-body"
+        }
+    ]
+}
+

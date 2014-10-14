@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html >
+<html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,16 +15,37 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/mustache.js/0.8.1/mustache.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/path.js/0.8.4/path.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/stacktrace.js/0.6.2/stacktrace.min.js"></script> <!--Just to debug app-->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/marked/0.3.2/marked.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="Scripts/locache.js"></script>
+    <script src="Scripts/core.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
     <script src="Scripts/jsvn.js"></script>
     <script src="Scripts/JSappf.js"></script>
+    <style>
+        body {
+            padding-top: 70px;
+            padding-bottom: 30px;
+        }
+
+        .theme-dropdown .dropdown-menu {
+            position: static;
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .theme-showcase > p > .btn {
+            margin: 5px 0;
+        }
+
+        .theme-showcase .navbar .container {
+            width: auto;
+        }
+    </style>
 </head>
 <body>
-    <div id="main-content">
-        <div id="main-body">
-        </div>
+    <div id="main-body">
     </div>
     <script type="text/javascript">
         $(document).ready(function () {
@@ -33,7 +54,6 @@
                 modulesPath: 'modules',
                 templatesPath: 'views',
                 bodyTag: 'main-body',
-                layoutTag: 'main-content',
                 doCache: false
             });
         });

@@ -3,30 +3,45 @@
     name: "users configuration Page",
     description: "This is the page to update users",
     view: {
-        viewName: 'users configuration',
-        elements: [
-            {
-                "element": "h1",
-                "content": "This is the users module"
-            },
+        "viewName": "users",
+        "description": "This view is used when a users module is called",
+        "viewType": "json",
+        "elements": [
             {
                 "element": "div",
-                "id": "div1",
-                "style": "color:blue;",
-                "content": "This is the content for the users module"
-            },
-                {
-                    "element": "a",
-                    "href": "#/index",
-                    "content": "back to index"
-                }
+                "class": "container",
+                "content": [
+                    {
+                        "element": "div",
+                        "class": "jumbotron",
+                        "style": "margin-top: 50px;",
+                        "content": [
+                            {
+                                "element": "h1",
+                                "content": "Users Module"
+                            },
+                            {
+                                "element": "p",
+                                "content": "This is the content for the Users Module."
+                            },
+                            {
+                                "element": "a",
+                                "class": "btn btn-primary btn-lg",
+                                "href": "#/index",
+                                "content": "Back to Index"
+                            }
+                        ]
+                    }
+                ]
+            }
         ]
     },
     code: {
         start: function () {
-            console.log("users configuration starting...");
-            app.view(app.modules.configurations_users.view);
-            console.log("users configuration modules loaded...");
+            app.view({
+                view: app.modules.configurations_users.view,
+                place: app.settings.bodyTag
+            });
         }
     }
 }
