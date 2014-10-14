@@ -12,7 +12,7 @@ var contador = 0;
 var app = {
     settings: {
         modulesPath: "modules", //default directory will be 'app'
-        viewsPath: "views",
+        viewsPath: "jsvnViews",
         templateRender: Mustache, //Default template render http://mustache.github.io/
         bodyTag: "main-body",
         viewEngine: jsvn,
