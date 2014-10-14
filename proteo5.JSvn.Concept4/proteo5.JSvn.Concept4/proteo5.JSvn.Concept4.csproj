@@ -59,6 +59,7 @@
   <ItemGroup>
     <None Include="views\configurations\sites.json" />
     <Content Include="modules\demo.js" />
+    <Content Include="Scripts\core.js" />
     <Content Include="views\demo.html" />
     <Content Include="views\shared\layout.json" />
     <Content Include="views\shared\viewNotFound.json" />

@@ -3,6 +3,8 @@ app.title = "Concept JSvn";
 app.description = "This is a Concept application for Javascript View Notation";
 app.author = "Alfredo Pinto Molina";
 app.settings.externalViews = [];
+app.settings.defaultLocalization = "es-MX";
+app.settings.supportedLocalization = ["es", "en", "en-US"]
 app.modules.main = {
     code: {
         start: function () {

@@ -11,6 +11,7 @@
 var jsvn = {
     settings: {
         appVersion: "",
+        localization: "en-US",
         doCache: true,
         viewsPath: "views",
         templateRender: Mustache, //Default template render http://mustache.github.io/
@@ -28,46 +29,59 @@ var jsvn = {
     render: function (template, data) {
         return jsvn.settings.templateRender.render(template, data);
     },
-    getViewHTML: function (view) {
+    getViewHTML: function (view, resources) {
         var elementHTML = "";
         if (view.elements.length == 0) {
             var file = jsvn.loadView(view.viewPath + view.viewName, view.viewType);
-            console.log(file);
             if (view.viewType == "json") {
                 var viewJson = $.parseJSON(file);
-                elementHTML = jsvn.renderViews(viewJson.elements);
+                elementHTML = jsvn.renderViews(viewJson.elements, resources);
             } else {
                 elementHTML = file;
             }
         } else {
-            elementHTML = jsvn.renderViews(view.elements);
+            elementHTML = jsvn.renderViews(view.elements, resources);
         }
         if (elementHTML == "") {
             elementHTML = $.parseJSON(jsvn.loadView("shared/viewNotFound", "json"));
         }
         return elementHTML;
     },
-    renderViews: function (elements) {
+    renderViews: function (elements, resources) {
         var elementHTML = "";
         $.each(elements, function (i, item) {
-            elementHTML = elementHTML + jsvn.renderElement(item);
+            elementHTML = elementHTML + jsvn.renderElement(item, resources);
         });
         return elementHTML;
     },
-    renderElement: function (viewObj) {
+    renderElement: function (viewObj, resources) {
         var element = "";
         var attributes = "";
         var content = "";
         $.each(viewObj, function (i, item) {
             switch (i) {
                 case "content":
-                    content = typeof item == "string" ? item : jsvn.renderViews(item);
+                    content = typeof item == "string" ? item : jsvn.renderViews(item, resources);
                     break;
                 case "text":
                     content = marked(item);
                     break;
                 case "element":
                     element = item;
+                    break;
+                case "resource":
+                    var currentlyLocalizationText = "";
+                    if (resources.hasOwnProperty(item)) {
+                        $.each(resources[item], function (ii, item2) {
+
+                            if (ii == jsvn.settings.localization) {
+                                currentlyLocalizationText = item2;
+                            }
+                            console.log(ii, jsvn.settings.localization);
+                        });
+                        content = jsvn.render("<span>{{{text}}}</span>", { text: marked(currentlyLocalizationText) });//<script type='text/javascript'>Core.listen('localization',function(value){   });</script>"
+                        console.log("content", content);
+                    }
                     break;
                 default:
                     attributes = attributes + jsvn.render("{{{attr}}}='{{{value}}}'", { attr: i, value: item });

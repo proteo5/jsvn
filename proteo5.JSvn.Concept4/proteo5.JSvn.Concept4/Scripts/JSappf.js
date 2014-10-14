@@ -62,7 +62,23 @@ var app = {
         // Start Application
         app.loadModule("main");
 
+        //Set localization
+        var localization = locache.get(app.version + "-localization");
+        if (localization == null) {
+            var browserLocalization = window.navigator.userLanguage || window.navigator.language;
+            localization = app.settings.supportedLocalization.indexOf(browserLocalization) == -1 ? app.settings.defaultLocalization : browserLocalization;
+            app.setLocalization(localization);
+        }
+        app.settings.viewEngine.settings.localization = localization;
+
+        //start routing.
         Path.listen();
+    },
+    setLocalization: function (localization) {
+        console.log("set localization", localization);
+        locache.set(app.version + "-localization", localization);
+        app.settings.viewEngine.settings.localization = localization;
+        //Core.push('localization', localization);
     },
     view: function (data) {
         //console.log("caller is ", printStackTrace().join('\n\n'));
@@ -71,7 +87,7 @@ var app = {
             result = locache.get(app.version + "-v-" + data.view.viewName);
         }
         if (result == null) {
-            result = app.settings.viewEngine.getViewHTML(data.view);
+            result = app.settings.viewEngine.getViewHTML(data.view, data.resources);
             if (app.settings.doCache) {
                 locache.set(app.version + "-v-" + data.view.viewName, result, 3600);
             }
@@ -81,7 +97,7 @@ var app = {
             data.modelPlace = data.modelPlace == undefined ? data.place : data.modelPlace;
             ko.cleanNode($('#' + data.modelPlace)[0]);
         }
-        document.getElementById(data.place).innerHTML = result ;
+        document.getElementById(data.place).innerHTML = result;
         if (data.model != undefined) {
             ko.applyBindings(data.model, document.getElementById(data.modelPlace));
         }
