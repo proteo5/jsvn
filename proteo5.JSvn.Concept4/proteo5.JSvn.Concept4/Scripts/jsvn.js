@@ -13,7 +13,7 @@ var jsvn = {
         appVersion: "",
         localization: "en-US",
         doCache: true,
-        viewsPath: "views",
+        viewsPath: "jsvnViews",
         templateRender: Mustache, //Default template render http://mustache.github.io/
         externalViews: []
     },

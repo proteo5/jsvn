@@ -57,12 +57,12 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="views\configurations\sites.json" />
+    <None Include="jsvnViews\configurations\sites.json" />
     <Content Include="modules\demo.js" />
     <Content Include="Scripts\core.js" />
-    <Content Include="views\demo.html" />
-    <Content Include="views\shared\layout.json" />
-    <Content Include="views\shared\viewNotFound.json" />
+    <Content Include="jsvnViews\demo.html" />
+    <Content Include="jsvnViews\shared\layout.json" />
+    <Content Include="jsvnViews\shared\viewNotFound.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
