@@ -71,16 +71,17 @@ var jsvn = {
                     break;
                 case "resource":
                     var currentlyLocalizationText = "";
+                    var localizationsProperties = "";
                     if (resources.hasOwnProperty(item)) {
                         $.each(resources[item], function (ii, item2) {
-
                             if (ii == jsvn.settings.localization) {
                                 currentlyLocalizationText = item2;
                             }
-                            console.log(ii, jsvn.settings.localization);
+                            localizationsProperties = localizationsProperties
+                                + jsvn.render("data-localization-{{{code}}}='{{{text}}}' ", { code: ii, text: item2 });
                         });
-                        content = jsvn.render("<span>{{{text}}}</span>", { text: marked(currentlyLocalizationText) });//<script type='text/javascript'>Core.listen('localization',function(value){   });</script>"
-                        console.log("content", content);
+                        content = jsvn.render("<span class='item-localizated' {{{properties}}}>{{{text}}}</span>",
+                            { properties: localizationsProperties, text: marked(currentlyLocalizationText) });
                     }
                     break;
                 default:

@@ -75,10 +75,11 @@ var app = {
         Path.listen();
     },
     setLocalization: function (localization) {
-        console.log("set localization", localization);
         locache.set(app.version + "-localization", localization);
         app.settings.viewEngine.settings.localization = localization;
-        //Core.push('localization', localization);
+        $(".item-localizated").each(function (index, item) {
+            $(this).html(marked( $(this).data("localization-" + localization.toLowerCase())));
+        });
     },
     view: function (data) {
         //console.log("caller is ", printStackTrace().join('\n\n'));

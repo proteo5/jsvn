@@ -154,7 +154,6 @@
             myModel.fullName = ko.computed(function () {
                 return this.firstName() + " " + this.lastName();
             }, myModel);
-            console.log("res", app.modules.index.resourses);
             app.view({
                 view: app.modules.index.view,
                 viewType: "json",
