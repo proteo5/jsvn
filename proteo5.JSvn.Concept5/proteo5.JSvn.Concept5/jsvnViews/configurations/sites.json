@@ -1,0 +1,31 @@
+﻿{
+    "elements": [
+        {
+            "element": "div",
+            "class": "container",
+            "content": [
+                {
+                    "element": "div",
+                    "class": "jumbotron",
+                    "style": "margin-top: 50px;",
+                    "content": [
+                        {
+                            "element": "h1",
+                            "content": "Sites Module"
+                        },
+                        {
+                            "element": "p",
+                            "content": "This is the content for the Sitess Module."
+                        },
+                        {
+                            "element": "a",
+                            "class": "btn btn-primary btn-lg",
+                            "href": "#/index",
+                            "content": "Back to Index"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

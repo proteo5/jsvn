@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{29DD9431-1AA5-4953-9BB3-A2F1148CD932}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>proteo5.JSvn.Concept5</RootNamespace>
+    <AssemblyName>proteo5.JSvn.Concept5</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="jsvnViews\configurations\sites.json" />
+    <Content Include="jsvnViews\shared\layout.json" />
+    <Content Include="jsvnViews\shared\viewNotFound.json" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="index.html" />
+    <Content Include="jsvnViews\demo.html" />
+    <Content Include="main.js" />
+    <Content Include="modules\configurations\sites.js" />
+    <Content Include="modules\configurations\users.js" />
+    <Content Include="modules\demo.js" />
+    <Content Include="modules\index.js" />
+    <Content Include="modules\logIn.js" />
+    <Content Include="Scripts\core.js" />
+    <Content Include="Scripts\dataTables\dataTables.bootstrap.js" />
+    <Content Include="Scripts\dataTables\jquery.dataTables.js" />
+    <Content Include="Scripts\flot\excanvas.min.js" />
+    <Content Include="Scripts\flot\flot-data.js" />
+    <Content Include="Scripts\flot\jquery.flot.js" />
+    <Content Include="Scripts\flot\jquery.flot.pie.js" />
+    <Content Include="Scripts\flot\jquery.flot.resize.js" />
+    <Content Include="Scripts\flot\jquery.flot.tooltip.min.js" />
+    <Content Include="Scripts\JSappf.js" />
+    <Content Include="Scripts\jsvn.js" />
+    <Content Include="Scripts\locache.js" />
+    <Content Include="Scripts\locache.min.js" />
+    <Content Include="jsvnViews\logIn.json" />
+    <None Include="Scripts\_references.js" />
+    <Content Include="Scripts\metisMenu\metisMenu.js" />
+    <Content Include="Scripts\metisMenu\metisMenu.min.js" />
+    <Content Include="Scripts\morris\morris-data.js" />
+    <Content Include="Scripts\morris\morris.js" />
+    <Content Include="Scripts\morris\morris.min.js" />
+    <Content Include="Scripts\morris\raphael.min.js" />
+    <Content Include="Scripts\sb-admin-2.js" />
+    <Content Include="stock\css\bootstrap.css" />
+    <Content Include="stock\css\bootstrap.min.css" />
+    <Content Include="stock\css\dataTables.bootstrap.css" />
+    <Content Include="stock\css\metisMenu.css" />
+    <Content Include="stock\css\metisMenu.min.css" />
+    <Content Include="stock\css\morris.css" />
+    <Content Include="stock\css\sb-admin-2.css" />
+    <Content Include="stock\css\social-buttons.css" />
+    <Content Include="stock\css\timeline.css" />
+    <Content Include="stock\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Web.config" />
+    <Content Include="stock\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="stock\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="stock\fonts\glyphicons-halflings-regular.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>15802</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:15802/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
