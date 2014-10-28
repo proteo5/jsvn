@@ -75,6 +75,7 @@
     <Content Include="modules\configurations\users.js" />
     <Content Include="modules\demo.js" />
     <Content Include="modules\index.js" />
+    <Content Include="modules\index\dashboard.js" />
     <Content Include="modules\logIn.js" />
     <Content Include="Scripts\core.js" />
     <Content Include="Scripts\dataTables\dataTables.bootstrap.js" />

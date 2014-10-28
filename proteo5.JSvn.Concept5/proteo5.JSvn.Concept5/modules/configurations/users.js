@@ -1,6 +1,7 @@
 ﻿app.modules.configurations_users = {
     module: "configurations users",
     name: "users configuration Page",
+    type: "control",
     description: "This is the page to update users",
     view: {
         "viewName": "users",
@@ -23,12 +24,6 @@
                             {
                                 "element": "p",
                                 "content": "This is the content for the Users Module."
-                            },
-                            {
-                                "element": "a",
-                                "class": "btn btn-primary btn-lg",
-                                "href": "#/index",
-                                "content": "Back to Index"
                             }
                         ]
                     }
@@ -41,7 +36,7 @@
         start: function () {
             app.view({
                 view: app.modules.configurations_users.view,
-                place: app.settings.bodyTag
+                place: app.settings.moduleTag
             });
         }
     }

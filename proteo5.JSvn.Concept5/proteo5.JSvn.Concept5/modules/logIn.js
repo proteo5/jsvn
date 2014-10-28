@@ -1,6 +1,7 @@
 ﻿app.modules.logIn = {
     module: "logIn",
     name: "Log In",
+    type: "page",
     description: "This is the page to Log in to the application",
     code: {
         start: function () {

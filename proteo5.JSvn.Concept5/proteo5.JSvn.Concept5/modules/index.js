@@ -1,6 +1,7 @@
 ﻿app.modules.index = {
     module: "index",
     name: "Home Page",
+    type:"page",
     description: "This is our default page",
     model: {},
     resources: {
@@ -88,6 +89,15 @@
                                   "class": "col-sm-2",
                                   "content": [{
                                       "element": "a",
+                                      "href": "#/index/dashboard",
+                                      "text": "Dashboard"
+                                  }]
+                              },
+                              {
+                                  "element": "div",
+                                  "class": "col-sm-2",
+                                  "content": [{
+                                      "element": "a",
                                       "href": "#/configurations/users",
                                       "text": "Users page"
                                   }]
@@ -142,6 +152,11 @@
                           ]
                       }
                     ]
+                },
+                {
+                    "element": "div",
+                    "class": "row",
+                    "id": "module-content"
                 }
               ]
           },
@@ -150,23 +165,29 @@
     },
     code: {
         start: function () {
-                var myModel = app.modules.index.model;
-                myModel.firstName = ko.observable('a');
-                myModel.lastName = ko.observable('b');
-                myModel.actionButton = app.modules.index.code.actionButton;
-                myModel.setLocalizationEnglish = app.modules.index.code.setLocalizationEnglish;
-                myModel.setLocalizationSpanish = app.modules.index.code.setLocalizationSpanish;
-                myModel.fullName = ko.computed(function () {
-                    return this.firstName() + " " + this.lastName();
-                }, myModel);
-                app.view({
-                    view: app.modules.index.view,
-                    viewType: "json",
-                    model: myModel,
-                    modelPlace: app.settings.bodyTag,
-                    place: app.settings.bodyTag,
-                    resources: app.modules.index.resources
-                });
+            //Create Model
+            var myModel = app.modules.index.model;
+            myModel.firstName = ko.observable('a');
+            myModel.lastName = ko.observable('b');
+            myModel.actionButton = app.modules.index.code.actionButton;
+            myModel.setLocalizationEnglish = app.modules.index.code.setLocalizationEnglish;
+            myModel.setLocalizationSpanish = app.modules.index.code.setLocalizationSpanish;
+            myModel.fullName = ko.computed(function () {
+                return this.firstName() + " " + this.lastName();
+            }, myModel);
+
+            //Render view
+            app.view({
+                view: app.modules.index.view,
+                viewType: "json",
+                place: app.settings.bodyTag,
+                resources: app.modules.index.resources
+            });
+            //Place the bind
+            app.bind(myModel, 'div2');
+
+            //Load submodule
+            app.loadModule('index_dashboard');
         },
         actionButton: function () {
             var myModel = app.modules.index.model;

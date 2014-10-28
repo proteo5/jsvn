@@ -1,6 +1,7 @@
 ﻿app.modules.demo = {
     module: "demoPage",
     name: "demoPage",
+    type: "page",
     description: "This is the demo page ",
     code: {
         start: function () {
@@ -14,7 +15,7 @@
                 },
                 place: app.settings.bodyTag
             });
-            $('#carousel-example-generic').carousel()
+            //$('#carousel-example-generic').carousel()
         }
     }
 }

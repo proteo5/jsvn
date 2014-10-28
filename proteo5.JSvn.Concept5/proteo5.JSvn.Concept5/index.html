@@ -24,15 +24,16 @@
     <script src="Scripts/JSappf.js"></script>
 </head>
 <body>
-    <div id="main-body" class="container">
+    <div id="main-body">
     </div>
     <script type="text/javascript">
         $(document).ready(function () {
             app.start({
-                version: '0.4.0',
+                version: '0.5.0',
                 modulesPath: 'modules',
                 viewsPath: 'jsvnViews',
                 bodyTag: 'main-body',
+                moduleTag:'module-content',
                 doCache: false
             });
         });
