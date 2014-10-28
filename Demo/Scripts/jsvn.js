@@ -1,4 +1,4 @@
-﻿// JavaScript View Notation (jsvn) v0.4.0 alfa, http://jsvn.org/
+﻿// JavaScript View Notation (jsvn) v0.5.0 alfa, http://jsvn.org/
 //
 // <copyright file="jsvn.js" company="Alfredo Pinto Molina">
 //      Copyright (c) 2014 All Right Reserved
@@ -64,7 +64,7 @@ var jsvn = {
                     content = typeof item == "string" ? item : jsvn.renderViews(item, resources);
                     break;
                 case "text":
-                    content = marked(item);
+                    content = item;
                     break;
                 case "element":
                     element = item;
@@ -80,9 +80,14 @@ var jsvn = {
                             localizationsProperties = localizationsProperties
                                 + jsvn.render("data-localization-{{{code}}}='{{{text}}}' ", { code: ii, text: item2 });
                         });
+                        //content = jsvn.render("<span class='item-localizated' {{{properties}}}>{{{text}}}</span>",
+                        //    { properties: localizationsProperties, text: marked(currentlyLocalizationText) });
                         content = jsvn.render("<span class='item-localizated' {{{properties}}}>{{{text}}}</span>",
-                            { properties: localizationsProperties, text: marked(currentlyLocalizationText) });
+                            { properties: localizationsProperties, text: currentlyLocalizationText });
                     }
+                    break;
+                case "extra":
+                    attributes = attributes + " " + item;
                     break;
                 default:
                     attributes = attributes + jsvn.render("{{{attr}}}='{{{value}}}'", { attr: i, value: item });
@@ -99,7 +104,8 @@ var jsvn = {
         }
 
         if (result == "") {
-            result = "<" + elementName + " {{{attributes}}}" + (content == "" ? " />" : ">{{{content}}}</" + elementName + ">");
+            //result = "<" + elementName + " {{{attributes}}}" + (content == "" && elementName != 'script' && elementName != 'input' ? " />" : ">{{{content}}}</" + elementName + ">");
+            result = "<" + elementName + " {{{attributes}}}" + ">{{{content}}}</" + elementName + ">";
         }
 
         return result;

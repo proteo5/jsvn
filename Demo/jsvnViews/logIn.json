@@ -1,0 +1,111 @@
+﻿{
+    "elements": [
+        {
+            "element": "div",
+            "class": "container",
+            "content": [
+                {
+                    "element": "div",
+                    "class": "row",
+                    "content": [
+                        {
+                            "element": "div",
+                            "class": "col-md-4 col-md-offset-4",
+                            "content": [
+                                {
+                                    "element": "div",
+                                    "class": "login-panel panel panel-default",
+                                    "content": [
+                                        {
+                                            "element": "div",
+                                            "class": "panel-heading",
+                                            "content": [
+                                                {
+                                                    "element": "h3",
+                                                    "class": "panel-title",
+                                                    "content": "Please Sign In"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "element": "div",
+                                            "class": "panel-body",
+                                            "content": [
+                                                {
+                                                    "element": "form",
+                                                    "role": "form",
+                                                    "content": [
+                                                        {
+                                                            "element": "fieldset",
+                                                            "content": [
+                                                                {
+                                                                    "element": "div",
+                                                                    "class": "form-group",
+                                                                    "content": [
+                                                                        {
+                                                                            "element": "input",
+                                                                            "class": "form-control",
+                                                                            "placeholder": "E-mail",
+                                                                            "name": "email",
+                                                                            "type": "email",
+                                                                            "extra": "autofocus"
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "element": "div",
+                                                                    "class": "form-group",
+                                                                    "content": [
+                                                                        {
+                                                                            "element": "input",
+                                                                            "class": "form-control",
+                                                                            "placeholder": "Password",
+                                                                            "name": "password",
+                                                                            "type": "password",
+                                                                            "value": ""
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "element": "div",
+                                                                    "class": "checkbox",
+                                                                    "content": [
+                                                                        {
+                                                                            "element": "label",
+                                                                            "content": [
+                                                                                {
+                                                                                    "element": "input",
+                                                                                    "name": "remember",
+                                                                                    "type": "checkbox",
+                                                                                    "value": "Remember Me",
+                                                                                    "content": "Remember Me"
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "element": "a",
+                                                                    "class": "btn btn-lg btn-success btn-block",
+                                                                    "href": "#/index",
+                                                                    "content": "Login"
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        { "element": "script", "src": "//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js" },
+        { "element": "script", "src": "Scripts/metisMenu/metisMenu.min.js" },
+        { "element": "script", "src": "Scripts/sb-admin-2.js" }
+    ]
+}

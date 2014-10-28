@@ -4,7 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JSvn (Javascript View Notation)</title>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link href="stock/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="stock/css/metisMenu.min.css" rel="stylesheet" />
+    <link href="stock/css/sb-admin-2.css" rel="stylesheet" />
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -15,34 +18,10 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/mustache.js/0.8.1/mustache.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/path.js/0.8.4/path.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/stacktrace.js/0.6.2/stacktrace.min.js"></script> <!--Just to debug app-->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/marked/0.3.2/marked.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="Scripts/locache.js"></script>
-    <script src="Scripts/core.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
     <script src="Scripts/jsvn.js"></script>
     <script src="Scripts/JSappf.js"></script>
-    <style>
-        body {
-            padding-top: 70px;
-            padding-bottom: 30px;
-        }
-
-        .theme-dropdown .dropdown-menu {
-            position: static;
-            display: block;
-            margin-bottom: 20px;
-        }
-
-        .theme-showcase > p > .btn {
-            margin: 5px 0;
-        }
-
-        .theme-showcase .navbar .container {
-            width: auto;
-        }
-    </style>
 </head>
 <body>
     <div id="main-body">
@@ -50,10 +29,11 @@
     <script type="text/javascript">
         $(document).ready(function () {
             app.start({
-                version: '0.4.0',
+                version: '0.5.0',
                 modulesPath: 'modules',
                 viewsPath: 'jsvnViews',
                 bodyTag: 'main-body',
+                moduleTag:'module-content',
                 doCache: false
             });
         });

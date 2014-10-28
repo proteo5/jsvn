@@ -5,7 +5,9 @@ app.author = "Alfredo Pinto Molina";
 app.settings.externalViews = [];
 app.settings.defaultLocalization = "es-MX";
 app.settings.supportedLocalization = ["es", "en", "en-US"]
+app.hasSession = false;
 app.modules.main = {
+    type:"main",
     code: {
         start: function () {
             var title = app.render("{{title}} - {{version}}", app);

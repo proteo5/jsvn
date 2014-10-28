@@ -1,4 +1,4 @@
-﻿// JavaScript Application Framework (jsappf) v0.4.0 alfa, http://jsappf.org/
+﻿// JavaScript Application Framework (jsappf) v0.5.0 alfa, http://jsappf.org/
 //
 // <copyright file="JSappf.js" company="Alfredo Pinto Molina">
 //      Copyright (c) 2014 All Right Reserved
@@ -8,16 +8,17 @@
 // <email></email>
 // <date>2014-10-29</date>
 // <summary></summary>
-var contador = 0;
 var app = {
     settings: {
         modulesPath: "modules", //default directory will be 'app'
         viewsPath: "jsvnViews",
         templateRender: Mustache, //Default template render http://mustache.github.io/
         bodyTag: "main-body",
+        moduleTag: 'module-content',
         viewEngine: jsvn,
         doCache: true
     },
+    currentPage: "",
     //Method to render templates
     render: function (template, data) {
         return app.settings.templateRender.render(template, data);
@@ -35,6 +36,10 @@ var app = {
 
         if ($.trim(settings.bodyTag).length != 0) {
             app.settings.bodyTag = settings.bodyTag;
+        }
+
+        if ($.trim(settings.moduleTag).length != 0) {
+            app.settings.moduleTag = settings.moduleTag;
         }
 
         if ($.trim(settings.doCache).length != 0) {
@@ -78,7 +83,8 @@ var app = {
         locache.set(app.version + "-localization", localization);
         app.settings.viewEngine.settings.localization = localization;
         $(".item-localizated").each(function (index, item) {
-            $(this).html(marked( $(this).data("localization-" + localization.toLowerCase())));
+            // $(this).html(marked($(this).data("localization-" + localization.toLowerCase())));
+            $(this).html($(this).data("localization-" + localization.toLowerCase()));
         });
     },
     view: function (data) {
@@ -93,14 +99,13 @@ var app = {
                 locache.set(app.version + "-v-" + data.view.viewName, result, 3600);
             }
         }
-
-        if (data.model != undefined) {
-            data.modelPlace = data.modelPlace == undefined ? data.place : data.modelPlace;
-            ko.cleanNode($('#' + data.modelPlace)[0]);
-        }
+        ko.cleanNode($('#' + data.place)[0]);
         document.getElementById(data.place).innerHTML = result;
-        if (data.model != undefined) {
-            ko.applyBindings(data.model, document.getElementById(data.modelPlace));
+    },
+    bind: function (model, place) {
+        if (model != undefined && place != undefined) {
+            ko.cleanNode($('#' + place)[0]);
+            ko.applyBindings(model, document.getElementById(place));
         }
     },
     loadModule: function (module) {
@@ -119,6 +124,20 @@ var app = {
                 document.getElementsByTagName("head")[0].appendChild(fileref);
             }
         }
+        var moduleType = app.modules[module].type;
+        switch (moduleType) {
+            case "control":
+                if (app.currentPage != "index") {
+                    console.log("Submodule with no index");
+                    app.loadModule("index");
+                }
+                break;
+            case "page":
+                app.currentPage = module;
+                break;
+            default: break;
+        };
+
         app.executeFunctionByName(module + ".code.start", app.modules);
     },
     loadFile: function (path, filename) {

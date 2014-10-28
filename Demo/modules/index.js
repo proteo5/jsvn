@@ -1,16 +1,21 @@
 ﻿app.modules.index = {
     module: "index",
     name: "Home Page",
+    type:"page",
     description: "This is our default page",
     model: {},
     resources: {
         "title": {
-            "en-US": "This is the **main** Title",
-            "es-MX": "Este es el Titulo **Principal**"
+            "en-US": "This is the main Title",
+            "es-MX": "Este es el Titulo Principal"
         },
         "h2Title": {
-            "en-US": "This is the **h2** Title",
-            "es-MX": "Este es el titulo **h2**"
+            "en-US": "This is the h2 Title",
+            "es-MX": "Este es el titulo h2"
+        },
+        "buttonAction": {
+            "en-US": "Click Me",
+            "es-MX": "Clic Aqui"
         }
     },
     view: {
@@ -29,7 +34,7 @@
                 {
                     "element": "p",
                     "style": "color:blue;",
-                    "text": "test **p** to demostrate what can this do"
+                    "content": "test p to demostrate what can this do"
                 },
                 {
                     "element": "div",
@@ -67,7 +72,7 @@
                           "element": "button",
                           "data-bind": "click: actionButton",
                           "class": "btn btn-primary btn-lg",
-                          "content": "Click Me"
+                          "resource": "buttonAction"
                       },
                       {
                           "element": "br"
@@ -84,8 +89,17 @@
                                   "class": "col-sm-2",
                                   "content": [{
                                       "element": "a",
+                                      "href": "#/index/dashboard",
+                                      "text": "Dashboard"
+                                  }]
+                              },
+                              {
+                                  "element": "div",
+                                  "class": "col-sm-2",
+                                  "content": [{
+                                      "element": "a",
                                       "href": "#/configurations/users",
-                                      "text": "**Users** page"
+                                      "text": "Users page"
                                   }]
                               },
                               {
@@ -94,7 +108,7 @@
                                   "content": [{
                                       "element": "a",
                                       "href": "#/configurations/sites",
-                                      "text": "**Sites** page"
+                                      "content": "Sites page"
                                   }]
                               },
                               {
@@ -103,7 +117,7 @@
                                   "content": [{
                                       "element": "a",
                                       "href": "#/demo",
-                                      "text": "**Demo** page"
+                                      "content": "Demo page"
                                   }]
                               }
                           ]
@@ -122,7 +136,7 @@
                                       "element": "button",
                                       "data-bind": "click: setLocalizationSpanish",
                                       "class": "btn btn-primary",
-                                      "text": "Set Spanish"
+                                      "content": "Set Spanish"
                                   }]
                               },
                               {
@@ -132,19 +146,26 @@
                                       "element": "button",
                                       "class": "btn btn-primary",
                                       "data-bind": "click: setLocalizationEnglish",
-                                      "text": "Ver en Ingles"
+                                      "content": "Ver en Ingles"
                                   }]
                               }
                           ]
                       }
                     ]
+                },
+                {
+                    "element": "div",
+                    "class": "row",
+                    "id": "module-content"
                 }
               ]
-          }
+          },
+        { "element": "script", "src": "//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js" }
         ]
     },
     code: {
         start: function () {
+            //Create Model
             var myModel = app.modules.index.model;
             myModel.firstName = ko.observable('a');
             myModel.lastName = ko.observable('b');
@@ -154,14 +175,19 @@
             myModel.fullName = ko.computed(function () {
                 return this.firstName() + " " + this.lastName();
             }, myModel);
+
+            //Render view
             app.view({
                 view: app.modules.index.view,
                 viewType: "json",
-                model: myModel,
-                modelPlace: app.settings.bodyTag,
                 place: app.settings.bodyTag,
                 resources: app.modules.index.resources
             });
+            //Place the bind
+            app.bind(myModel, 'div2');
+
+            //Load submodule
+            app.loadModule('index_dashboard');
         },
         actionButton: function () {
             var myModel = app.modules.index.model;

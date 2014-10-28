@@ -1,6 +1,7 @@
 ﻿app.modules.configurations_sites = {
     module: "configurationsSites",
     name: "sites configuration Page",
+    type: "control",
     description: "This is the page to update sites",
     code: {
         start: function () {
@@ -12,7 +13,7 @@
                     "viewPath": "configurations/",
                     "elements":[]
                 },
-                place: app.settings.bodyTag
+                place: app.settings.moduleTag
             });
         }
     }
