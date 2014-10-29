@@ -1,0 +1,34 @@
+﻿// "viewName": "viewNotfound",
+// "description":"This is the view for the 'View Not Found' view",
+// "viewType": "json"
+{
+    "elements": [
+        {
+            "element": "div",
+            "class": "container",
+            "content": [
+                {
+                    "element": "div",
+                    "class": "jumbotron",
+                    "style": "margin-top: 50px;",
+                    "content": [
+                        {
+                            "element": "h1",
+                            "content": "View Not Found"
+                        },
+                        {
+                            "element": "p",
+                            "content": "Please review what view is setup to show with this module."
+                        },
+                        {
+                            "element": "a",
+                            "class": "btn btn-primary btn-lg",
+                            "href": "#/index",
+                            "content": "back to index"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
